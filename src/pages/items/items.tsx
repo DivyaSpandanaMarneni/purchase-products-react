@@ -54,16 +54,7 @@ export default class ItemsComponent extends Component<any, ItemsInfoState> {
                     }
 
 
-                    <div className={"product-card"}></div>
-                    <div className={"product-card"}></div>
-                    <div className={"product-card"}></div>
-                    <div className={"product-card"}></div>
-                    <div className={"product-card"}></div>
-                    <div className={"product-card"}></div>
-                    <div className={"product-card"}></div>
-                    <div className={"product-card"}></div>
-                    <div className={"product-card"}></div>
-                    <div className={"product-card"}></div>
+
                 </div>
 
 
