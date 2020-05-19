@@ -3,12 +3,17 @@
     flex-direction: row;
     justify-content: space-between;
     height: 50px;
-    background-color: #282c34;
+    background-color: #34495e;
 
-
+h5 {
+    display: table-cell;
+    vertical-align: middle;
 }
 
 .help-text {
+    height: 100%;
+    display: table;
+    flex-direction: row;
     width: 80px;
     text-align: left;
     color: aliceblue;
@@ -16,9 +21,16 @@
 }
 
 .signin-text {
+    height: 100%;
+    display: table;
     width: 100px;
     text-align: right;
     margin-right: 5px;
     color: aliceblue;
+    vertical-align: center;
 
 }
+
+
+}
+
