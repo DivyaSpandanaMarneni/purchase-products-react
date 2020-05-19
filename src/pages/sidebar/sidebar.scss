@@ -1,0 +1,48 @@
+.sidebar-wrapper {
+ align-items: flex-start;
+    width: 20%;
+  text-align: left;
+
+
+.filter-container-style {
+    margin-left: 0;
+    margin-right: 0;
+  max-width: 200px;
+  display: flex;
+  flex-direction: column;
+
+  #nav-categories {
+    border: 1px solid grey;
+    border-radius: 10px;
+    color: grey;
+    background-color: lightgray;
+    margin: 2px 4px 2px 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+}
+
+.container {
+    margin-left: 0 !important;
+    padding-left: 0 !important;
+    margin-right: 0 !important;
+    padding-right: 0 !important;
+}
+
+.drop-down {
+  position: relative;
+    //display: flex;
+    //align-items: flex-start;
+  grid-column: auto;
+  display: contents;
+}
+
+
+
+  .list-style {
+    position: relative;
+    width: 100%;
+  }
+}
+

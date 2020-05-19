@@ -1,0 +1,10 @@
+.header-style {
+  height: 100px;
+  width: 100%;
+  color: bisque;
+  background-color: gray;
+}
+.header-wrapper {
+  display: flex;
+  flex-direction: column;
+}
