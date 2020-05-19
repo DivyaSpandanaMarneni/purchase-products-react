@@ -28,8 +28,8 @@ export class ItemCard extends Component<ItemCardProperties, any>{
 
                 </div>
                 <div className={"price-section"}>
-                    <span>Org.Price {this.props.itemDetails.orgPrice}</span>
-                    <span>Sale Price {this.props.itemDetails.salePrice}</span>
+                    <h6>Org.Price {this.props.itemDetails.orgPrice}</h6>
+                    <h6>Sale Price {this.props.itemDetails.salePrice}</h6>
                 </div>
                 <div></div>
                 <div></div>
