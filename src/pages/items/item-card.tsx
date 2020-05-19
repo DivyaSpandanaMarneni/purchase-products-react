@@ -8,9 +8,6 @@ export type ItemCardProperties = {
 }
 
 export class ItemCard extends Component<ItemCardProperties, any>{
-    constructor(props: ItemCardProperties) {
-        super(props);
-    }
 
     componentDidMount() {
     }
@@ -19,8 +16,8 @@ export class ItemCard extends Component<ItemCardProperties, any>{
         return (
             <div className={"item-card-style"}>
                <div className={"img-section-style"}>
-                   <a className={"newWindow"} href={""}>
-                       <img src={this.props.itemDetails.imageLink} alt={"image"} className={"img-style"}></img>
+                   <a className={"newWindow"} href={this.props.itemDetails.productLink}>
+                       <img src={this.props.itemDetails.imageLink} alt={"Image Not Available"} className={"img-style"}></img>
                    </a>
                    <div className={"savings-on-img-style"}>
                        <div>Savings: </div>
