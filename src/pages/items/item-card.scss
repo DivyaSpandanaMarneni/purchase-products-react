@@ -11,14 +11,36 @@
   .img-section-style {
     width: 100%;
     height: 60%;
+    display: block;
+    overflow: hidden;
+    position: relative;
 
     img {
+      display: block;
       width: 100%;
-      height: 100%;
+      height: auto;
+    }
+
+    .savings-on-img-style {
+      background-color: darkgrey;
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-start;
+      line-height: 18px;
+      z-index: 10;
+      position: absolute !important;
+      bottom: 8%;
+      left: 0;
+      width: auto;
+      border-radius: 4px;
+      color: white;
+      font-size: 14px;
     }
   }
 
   .desc-section-style {
+    overflow-x: hidden;
+    overflow-y: auto;
 
   }
 

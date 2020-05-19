@@ -22,15 +22,20 @@ export class ItemCard extends Component<ItemCardProperties, any>{
                    <a className={"newWindow"} href={""}>
                        <img src={this.props.itemDetails.imageLink} alt={"image"} className={"img-style"}></img>
                    </a>
+                   <div className={"savings-on-img-style"}>
+                       <div>Savings: </div>
+                       <div>{this.props.itemDetails.savings}% OFF</div>
+                   </div>
                </div>
                 <div className={"desc-section-style"}>
                     <span>{this.props.itemDetails.productName}</span>
+                    <div className={"price-section"}>
+                        <h6>Org.Price {this.props.itemDetails.orgPrice}</h6>
+                        <h6>Sale Price {this.props.itemDetails.salePrice}</h6>
+                    </div>
 
                 </div>
-                <div className={"price-section"}>
-                    <h6>Org.Price {this.props.itemDetails.orgPrice}</h6>
-                    <h6>Sale Price {this.props.itemDetails.salePrice}</h6>
-                </div>
+
                 <div></div>
                 <div></div>
             </div>

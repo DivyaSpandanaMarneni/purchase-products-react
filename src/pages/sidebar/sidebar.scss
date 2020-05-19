@@ -15,7 +15,7 @@
     border: 1px solid grey;
     border-radius: 10px;
     color: grey;
-    background-color: lightgray;
+    background-color: #34495e;
     margin: 2px 4px 2px 0;
     position: relative;
     overflow: hidden;
@@ -47,6 +47,10 @@
   .list-style {
     position: relative;
     width: 100%;
+
+    .list-group-item {
+      background-color: lightsteelblue;
+    }
   }
 }
 

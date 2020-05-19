@@ -1,8 +1,8 @@
 .header-style {
   height: 100px;
   width: 100%;
-  color: bisque;
-  background-color: gray;
+  color: #3c3c3c;
+  background-color: lightsteelblue;
 }
 .header-wrapper {
   display: flex;
