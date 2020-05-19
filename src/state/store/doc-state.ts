@@ -8,12 +8,20 @@ export interface IApplicationState {
     itemsState: IItemState;
 }
 
-const rootReducer: Reducer<IApplicationState> = combineReducers<IApplicationState>({
-    itemsReducer: itemsReducer,
+const rootReducer = combineReducers({
+    items: itemsReducer
 });
 
+const initialState: IApplicationState = {
+    itemsState: {
+        items: [],
+        itemsLoading: false
+    }
+}
+
+
 export default function configureStore(): Store<IApplicationState> {
-    const store = createStore(rootReducer, undefined, applyMiddleware(thunk));
+    const store = createStore(rootReducer, null, applyMiddleware(thunk));
 
     // @ts-ignore
     return store;

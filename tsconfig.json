@@ -8,6 +8,8 @@
       "esnext"
     ],
     "allowJs": true,
+    "strictNullChecks": false,
+    "noStrictGenericChecks": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,

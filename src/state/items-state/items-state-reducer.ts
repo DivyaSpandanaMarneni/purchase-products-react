@@ -1,5 +1,5 @@
 import {Reducer} from "redux";
-import {IItemState, ItemsActions} from "./item-actions";
+import {IItemsGetAllAction, IItemState, ItemsActions} from "./item-actions";
 import {ItemActionTypes} from "./item-types";
 
 
@@ -8,12 +8,12 @@ const initialItemsState: IItemState = {
     itemsLoading: false
 }
 
-export const itemsReducer: Reducer<IItemState, ItemsActions> = (
+export function itemsReducer (
     state:IItemState = initialItemsState,
-    action
-) => {
+    action: any
+): IItemState {
 
-    switch ((action).type) {
+    switch ((action as ItemsActions).type) {
         case (ItemActionTypes.LOADING):
             return {
                 ...state,
@@ -23,7 +23,7 @@ export const itemsReducer: Reducer<IItemState, ItemsActions> = (
         case (ItemActionTypes.GETALL):
             return {
                 ...state,
-                items: action.items,
+                items: (action as IItemsGetAllAction).items,
                 itemsLoading: false
             }
 
