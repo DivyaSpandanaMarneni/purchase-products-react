@@ -1,9 +1,8 @@
 import * as React from "react";
 import {Component} from "react";
 import "./items.scss";
-import {ItemCard, ItemCardProperties} from "./item-card";
-import {IFilterCriteria, IItems} from "../../model/IItems";
-import {type} from "os";
+import {ItemCard} from "./item-card";
+import { IItems} from "../../model/IItems";
 import {IItem} from "../../model/IItem";
 
 
