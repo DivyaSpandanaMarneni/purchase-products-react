@@ -17,7 +17,7 @@ export class ItemCard extends Component<ItemCardProperties, any>{
             <div className={"item-card-style"}>
                <div className={"img-section-style"}>
                    <a className={"newWindow"} href={this.props.itemDetails.productLink}>
-                       <img src={this.props.itemDetails.imageLink} alt={"Image Not Available"} className={"img-style"}></img>
+                       <img src={this.props.itemDetails.imageLink} className={"img-style"}></img>
                    </a>
                    <div className={"savings-on-img-style"}>
                        <div>Savings: </div>
