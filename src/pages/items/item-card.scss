@@ -1,0 +1,39 @@
+.item-card-style {
+  margin: 2px;
+  height: auto;
+  width: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0;
+  text-align: center;
+
+  .img-section-style {
+    width: 100%;
+    height: 60%;
+
+    img {
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  .desc-section-style {
+
+  }
+
+  .price-section {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+
+    span {
+      display: inline-block;
+      height: 100%;
+      width: 100%;
+      margin: 0 auto;
+    }
+  }
+
+}

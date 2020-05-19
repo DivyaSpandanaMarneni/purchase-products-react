@@ -3,8 +3,8 @@ import logo from './logo.svg';
 import './App.scss';
 import {Header} from "./pages/header/header";
 import {Sidebar} from "./pages/sidebar/sidebar";
-import {Items} from "./pages/items/items";
 import Pagination from "react-bootstrap/Pagination";
+import ItemsComponent from "./pages/items/items";
 
 class App extends React.Component<{},{}> {
 
@@ -26,7 +26,7 @@ class App extends React.Component<{},{}> {
             <div className={"area-style"}>
                 <Sidebar className={"side-bar-style"}></Sidebar>
                 <div className={"display-section"}>
-                    <Items></Items>
+                    <ItemsComponent></ItemsComponent>
                     <div className={"footer-style"}>
                         <Pagination size={"sm"}>{items}</Pagination>
                     </div>
