@@ -51,15 +51,16 @@ export class Sidebar extends Component<any, SidebarState> {
         this.setState({openMenu: !this.state.openMenu} );
     }
 
+    captureFilterCriteria = () => {
+
+    }
+
     render() {
         console.log("categories data ", this.state.filterData.categories);
         return (
             <div className="sidebar-wrapper">
-
-
                 <Container className={"filter-container-style"}>
                         <Container>
-
                             <NavDropdown title={"Categories"} id={"nav-categories"}>
                                 <ListGroup className={"list-style"}>
                                     {
@@ -72,7 +73,6 @@ export class Sidebar extends Component<any, SidebarState> {
                                     }
                                 </ListGroup>
                             </NavDropdown>
-
                         </Container>
 
                         <Container>
@@ -85,11 +85,8 @@ export class Sidebar extends Component<any, SidebarState> {
                                             return (
                                                 <ListGroupItem action>{value}</ListGroupItem>
                                             )
-
                                         }) : undefined
-
                                     }
-
                                 </ListGroup>
                             </NavDropdown>
                         </Container>
@@ -106,12 +103,8 @@ export class Sidebar extends Component<any, SidebarState> {
                                         }) : undefined
                                     }
                                 </ListGroup>
-
                             </NavDropdown>
                         </Container>
-
-
-
                 </Container>
 
                 <ListGroup>
