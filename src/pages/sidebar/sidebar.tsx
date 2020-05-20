@@ -6,6 +6,7 @@ import "./sidebar.scss";
 import ListGroup from "react-bootstrap/ListGroup";
 import ListGroupItem from "react-bootstrap/ListGroupItem";
 import {ICategory, IFilter} from "../../model/IFilter"
+import {FilterType} from "../../model/IItems";
 
 
 type SidebarState = {
@@ -13,7 +14,6 @@ type SidebarState = {
     filterData: IFilter;
     clickedItem: String;
     error: String;
-
 }
 
 
@@ -51,8 +51,8 @@ export class Sidebar extends Component<any, SidebarState> {
         this.setState({openMenu: !this.state.openMenu} );
     }
 
-    captureFilterCriteria = () => {
-
+    captureFilterCriteria = (filterType: FilterType, value: String) => {
+        console.log("filter criteria value ", filterType, " ", value);
     }
 
     render() {
@@ -66,7 +66,7 @@ export class Sidebar extends Component<any, SidebarState> {
                                     {
                                         this.state.filterData.categories != null ? this.state.filterData.categories.map((category: ICategory, index) => {
                                             return  (
-                                                <ListGroupItem action>{category.catName}</ListGroupItem>
+                                                <ListGroupItem action onClick={() => this.captureFilterCriteria(FilterType.CATEGORY, category.catName)}>{category.catName}</ListGroupItem>
                                             )
                                             }
                                         ) : undefined
@@ -83,7 +83,7 @@ export class Sidebar extends Component<any, SidebarState> {
                                         this.state.filterData  && this.state.filterData.priceRanges ?
                                         Object.values(this.state.filterData.priceRanges).map((value:String, index) => {
                                             return (
-                                                <ListGroupItem action>{value}</ListGroupItem>
+                                                <ListGroupItem action onClick={() => this.captureFilterCriteria(FilterType.PRICERANGE, value)}>{value}</ListGroupItem>
                                             )
                                         }) : undefined
                                     }
@@ -98,7 +98,7 @@ export class Sidebar extends Component<any, SidebarState> {
                                         this.state.filterData  && this.state.filterData.discounts ?
                                         Object.values(this.state.filterData.discounts).map((value:String, index: number) => {
                                             return (
-                                                <ListGroupItem action>{value}</ListGroupItem>
+                                                <ListGroupItem action onClick={()=>this.captureFilterCriteria(FilterType.DISCOUNTS, value)}>{value}</ListGroupItem>
                                             )
                                         }) : undefined
                                     }

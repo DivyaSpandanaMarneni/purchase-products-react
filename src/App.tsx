@@ -4,39 +4,76 @@ import {Header} from "./pages/header/header";
 import {Sidebar} from "./pages/sidebar/sidebar";
 import Pagination from "react-bootstrap/Pagination";
 import ItemsComponent from "./pages/items/items";
+import {connect} from "react-redux";
+import {getItems, getItemsByFilter, createFilter, IFilterState} from "./state/filter-state/filter-actions";
+import {RouteComponentProps} from "react-router";
+import {IFilterCriteria, IItems} from "./model/IItems";
 
-class App extends React.Component<{},{}> {
+export interface IAppProps extends RouteComponentProps {
+    getItems?: typeof getItems;
+    items?: IItems;
+    getItemsByFilter?: typeof getItemsByFilter;
+    createFilter?: typeof createFilter;
+    filter?: IFilterCriteria;
+}
 
-  public render() {
+class App extends React.Component<IAppProps> {
 
-    let items: JSX.Element[] = [];
-    const active = 2;
+    componentWillMount() {
+        this.props.getItems();
+    }
 
-      for (let number = 1; number <= 5; number++) {
-          items.push(
-              <Pagination.Item key={number} active={number === active}>
-                  {number}
-              </Pagination.Item>,
-          );
-      }
-    return (
-        <div className="App">
-            <Header></Header>
-            <div className={"area-style"}>
-                <Sidebar className={"side-bar-style"}></Sidebar>
-                <div className={"display-section"}>
-                    <ItemsComponent></ItemsComponent>
-                    <div className={"footer-style"}>
-                        <Pagination size={"sm"}>{items}</Pagination>
+    componentDidMount() {
+        console.log('inside component did mount of app: getting items')
+        this.props.getItems();
+    }
+
+
+    public render() {
+
+        let items: JSX.Element[] = [];
+        const active = 2;
+
+        for (let number = 1; number <= 5; number++) {
+            items.push(
+                <Pagination.Item key={number} active={number === active}>
+                    {number}
+                </Pagination.Item>,
+            );
+        }
+        return (
+            <div className="App">
+                <Header></Header>
+                <div className={"area-style"}>
+                    <Sidebar className={"side-bar-style"}></Sidebar>
+                    <div className={"display-section"}>
+                        <ItemsComponent></ItemsComponent>
+                        <div className={"footer-style"}>
+                            <Pagination size={"sm"}>{items}</Pagination>
+                        </div>
                     </div>
-                </div>
 
+                </div>
             </div>
-        </div>
-    );
-  }
+        );
+    }
 
 
 }
 
-export default App;
+const mapStateToProps = (store: IFilterState) => {
+    return {
+        items: store.items,
+        filter: store.filter
+    }
+}
+
+const mapDispatchToProps = (dispatch: any) => {
+    return {
+        getItems: () => dispatch(getItems()),
+        createFilter: (filter: IFilterCriteria) => dispatch(createFilter(filter)),
+        getItemsByFilter: (filter: IFilterCriteria) => dispatch(getItemsByFilter(filter))
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

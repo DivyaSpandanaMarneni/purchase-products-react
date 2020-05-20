@@ -1,6 +1,6 @@
 export interface IItem {
     productId: number;
-    productName: String;
+    productName: string;
     productLink: string;
     imageLink: string;
     orgPrice: number;
