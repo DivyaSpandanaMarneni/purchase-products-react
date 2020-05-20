@@ -37,7 +37,7 @@ export class Sidebar extends Component<any, SidebarState> {
 
     public componentDidMount() {
 
-        fetch('http://104.45.189.171:8082/doc/appdata')
+        fetch('http://doc-aks-ingress.eastus.cloudapp.azure.com:8082/doc/appdata')
             .then(res => res.json())
             .then((data) => {
                 console.log("categories data ", data);

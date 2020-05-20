@@ -28,7 +28,7 @@ export default class ItemsComponent extends Component<any, ItemsInfoState> {
 
     componentDidMount() {
 
-        fetch('http://104.45.189.171:8082/doc/products')
+        fetch('http://doc-aks-ingress.eastus.cloudapp.azure.com:8082/doc/products')
             .then(res => res.json())
             .then((data: IItems) => {
                 console.log("items data count ", data.productCount);
