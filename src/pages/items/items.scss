@@ -9,14 +9,29 @@
     border-radius: 5px;
     margin-bottom: 10px;
     display: flex;
-    flex-direction: row-reverse;
+    justify-content: space-between;
+    flex-direction: row;
 
-
-    .badge {
-      color: white;
-      background-color: #34495e;
-      margin: 0 3px 0 3px;
+    h6 {
+      margin-top:6px;
+      margin-left: 4px;
+      opacity: 0.5;
     }
+
+    .chips-style {
+      display: flex;
+      flex-direction: row-reverse;
+
+
+      .badge {
+        color: white;
+        background-color: #34495e;
+        margin: 0 3px 0 3px;
+      }
+    }
+
+
+
   }
 
   .display-style {

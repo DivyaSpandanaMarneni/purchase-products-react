@@ -9,6 +9,7 @@ import Badge from "react-bootstrap/Badge";
 export type IItemsProps = {
     items: IItems;
     filters: string[];
+    itemsTotal: number;
 }
 
 export type ItemsInfoState = {
@@ -47,11 +48,18 @@ export default class ItemsComponent extends Component<IItemsProps, ItemsInfoStat
         return (
             <div className={"items-wrapper"}>
                 <div className={"filter-area"}>
-                    {this.props.filters.map(value => (
+                    <div><h6>Showing {this.props.itemsTotal} items</h6></div>
+                    <div className={"chips-style"}>
 
-                        <h4><Badge>{typeof value === 'number' ? this.map.get(value) : value }</Badge></h4>
-                    ))
-                    }
+                        {this.props.filters.map(value => (
+
+                            <h4><Badge>{typeof value === 'number' ? this.map.get(value) : value }</Badge></h4>
+                        ))
+                        }
+                    </div>
+
+
+
                 </div>
                 <div className={"display-style"}>
                     {

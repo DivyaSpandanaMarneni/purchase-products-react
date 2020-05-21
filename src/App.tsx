@@ -138,7 +138,7 @@ class App extends React.Component<IAppProps, IAppState> {
                 <div className={"area-style"}>
                     <Sidebar sendCriteria={(filterCriteria:IFilterCriteria) => this.getItemsByCriteria( filterCriteria)}></Sidebar>
                     <div className={"display-section"}>
-                        <ItemsComponent filters={this.state.chips} items={this.state.items}></ItemsComponent>
+                        <ItemsComponent filters={this.state.chips} items={this.state.items} itemsTotal={this.props.items.products.length}></ItemsComponent>
                         <div className={"footer-style"}>
                             <Pagination size={"sm"}>{items}</Pagination>
                         </div>
