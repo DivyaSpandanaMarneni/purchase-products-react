@@ -25,6 +25,7 @@ export interface IAppState {
     items: IItems;
     activePage: number;
     pageCount: number;
+    chips: string[]
 
 }
 
@@ -44,7 +45,8 @@ class App extends React.Component<IAppProps, IAppState> {
         this.state = {
             items: initialFilterState.items,
             activePage: 1,
-            pageCount: 1
+            pageCount: 1,
+            chips: []
         }
     }
 
@@ -54,8 +56,6 @@ class App extends React.Component<IAppProps, IAppState> {
 
     componentDidUpdate(prevProps: Readonly<IAppProps>, prevState: Readonly<{}>, snapshot?: any) {
         if (prevProps.items !== this.props.items) {
-            console.log("inside component did update");
-            console.log("ACTIVE PAGE ", this.state.activePage);
             this.setState({items: this.props.items}, () => {
                 if(this.props.items.products && this.props.items.products.length > 0) {
                     this.setState({
@@ -80,6 +80,17 @@ class App extends React.Component<IAppProps, IAppState> {
 
 
     getItemsByCriteria(filterCriteria: IFilterCriteria): void {
+
+        const entries: string[] = [];
+
+        Object.entries(filterCriteria).forEach(([key,value] )=> {
+            if((key === "priceRange" || key === "savings" || key === "catId") && value != null) {
+                entries.push(value);
+            }
+        });
+
+        this.setState({chips: entries});
+
         this.props.clearItems();
         this.setState({
             activePage: 1,
@@ -107,15 +118,6 @@ class App extends React.Component<IAppProps, IAppState> {
 
     public render() {
 
-        if(this.props.items && this.props.items.products) {
-            console.log("props items ", this.props.items.products.length)
-
-            console.log("state products len ", this.state.items.products.length);
-
-
-
-        }
-
         let items: JSX.Element[] = [];
         const active = 2;
 
@@ -136,7 +138,7 @@ class App extends React.Component<IAppProps, IAppState> {
                 <div className={"area-style"}>
                     <Sidebar sendCriteria={(filterCriteria:IFilterCriteria) => this.getItemsByCriteria( filterCriteria)}></Sidebar>
                     <div className={"display-section"}>
-                        <ItemsComponent items={this.state.items}></ItemsComponent>
+                        <ItemsComponent filters={this.state.chips} items={this.state.items}></ItemsComponent>
                         <div className={"footer-style"}>
                             <Pagination size={"sm"}>{items}</Pagination>
                         </div>

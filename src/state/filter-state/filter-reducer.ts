@@ -56,6 +56,5 @@ export const filterReducer: Reducer<IFilterState, FilterActions> = (
                 filter: initialFilterState.filter
             }
     }
-    console.log(" state in reducer outside switch ", state.items.products.length)
     return state;
 }

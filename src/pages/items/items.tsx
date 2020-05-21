@@ -4,10 +4,11 @@ import "./items.scss";
 import {ItemCard} from "./item-card";
 import { IItems} from "../../model/IItems";
 import {IItem} from "../../model/IItem";
+import Badge from "react-bootstrap/Badge";
 
 export type IItemsProps = {
     items: IItems;
-    // paging info optional
+    filters: string[];
 }
 
 export type ItemsInfoState = {
@@ -16,12 +17,23 @@ export type ItemsInfoState = {
 }
 
 export default class ItemsComponent extends Component<IItemsProps, ItemsInfoState> {
+    map: Map<number, string> = new Map<number, string>();
     constructor(props:IItemsProps) {
         super(props);
         this.state = {
             items: this.props.items,
             itemsLoading: true
         }
+
+
+        this.map.set(0, "Men");
+        this.map.set(1, "Women");
+        this.map.set(2, "Kids");
+        this.map.set(3, "Shoes");
+        this.map.set(4, "Handbags");
+        this.map.set(5, "Beauty");
+        this.map.set(6, "Juniors");
+        this.map.set(7, "Accessories");
 
     }
 
@@ -31,10 +43,16 @@ export default class ItemsComponent extends Component<IItemsProps, ItemsInfoStat
 
 
     render() {
-        if (this.state.items && this.state.items.products)
-        console.log("rendering inside items ", this.state.items.products.length, " ", this.props.items.products.length);
+
         return (
             <div className={"items-wrapper"}>
+                <div className={"filter-area"}>
+                    {this.props.filters.map(value => (
+
+                        <h4><Badge>{typeof value === 'number' ? this.map.get(value) : value }</Badge></h4>
+                    ))
+                    }
+                </div>
                 <div className={"display-style"}>
                     {
                         this.props.items && this.props.items.products ?

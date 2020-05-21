@@ -61,7 +61,6 @@ export class Sidebar extends Component<ISidebarProps, SidebarState> {
         })
             .then(res => res.json())
             .then((data: IFilter) => {
-                console.log("categories data ", data);
                 this.setState({ filterData: data })
             })
             .catch(console.log)
@@ -73,7 +72,6 @@ export class Sidebar extends Component<ISidebarProps, SidebarState> {
     }
 
     captureFilterCriteria = (filterType: FilterType, value: String | number) => {
-        console.log("filter criteria value ", filterType, " ", value);
         // state is getting updated with a delay
         switch (filterType) {
             case FilterType.CATEGORY:
@@ -106,12 +104,10 @@ export class Sidebar extends Component<ISidebarProps, SidebarState> {
 
         }
 
-        console.log("using send criteria in child component")
         this.props.sendCriteria(this.state.filterCriteria);
     }
 
     render() {
-        console.log("price range data ", this.state.filterData.priceRanges);
         return (
             <div className="sidebar-wrapper">
                 <Container className={"filter-container-style"}>

@@ -17,7 +17,6 @@ export class FiltersService {
         })
             .then(res => res.json())
             .then((data: IItems) => {
-                console.log("items data count from service with filter criteria", data.productCount);
                 return data;
             })
             .catch(error =>  error)
@@ -35,7 +34,6 @@ export class FiltersService {
         })
             .then(res => res.json())
             .then((data: IItems) => {
-                console.log("items data count from service", data.productCount);
                 return data;
             })
             .catch(error =>  error)

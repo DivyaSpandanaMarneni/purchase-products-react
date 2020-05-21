@@ -1,4 +1,23 @@
 .items-wrapper {
+  display: flex;
+  flex-direction: column;
+
+  .filter-area {
+    height: 40px;
+    width: 92%;
+    border: 1px solid grey;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: row-reverse;
+
+
+    .badge {
+      color: white;
+      background-color: #34495e;
+      margin: 0 3px 0 3px;
+    }
+  }
 
   .display-style {
     display: flex;

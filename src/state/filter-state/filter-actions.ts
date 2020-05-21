@@ -34,7 +34,6 @@ export const getItems: ActionCreator<ThunkAction<Promise<AnyAction>, IFilterStat
     return async (dispatch: Dispatch) => {
         // @ts-ignore
         const items: IItems = await FiltersService.getItemsDefault(); // change to API or axios calls
-        console.log("action creator result ", items.productCount);
         return dispatch({
             items,
             type: FilterActionTypes.GETALL
