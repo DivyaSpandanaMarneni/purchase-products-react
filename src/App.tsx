@@ -19,6 +19,11 @@ export interface IAppProps extends RouteComponentProps {
 
 class App extends React.Component<IAppProps> {
 
+    constructor(props: IAppProps) {
+        super(props);
+        this.getItemsByCriteria = this.getItemsByCriteria.bind(this);
+    }
+
     componentWillMount() {
         this.props.getItems();
     }
@@ -26,6 +31,12 @@ class App extends React.Component<IAppProps> {
     componentDidMount() {
         console.log('inside component did mount of app: getting items')
         this.props.getItems();
+    }
+
+    getItemsByCriteria(filterCriteria: IFilterCriteria): void {
+        this.props.createFilter(filterCriteria);
+        console.log('filter criteria from side bar ', filterCriteria);
+        this.props.getItemsByFilter(filterCriteria);
     }
 
 
@@ -45,7 +56,7 @@ class App extends React.Component<IAppProps> {
             <div className="App">
                 <Header></Header>
                 <div className={"area-style"}>
-                    <Sidebar className={"side-bar-style"}></Sidebar>
+                    <Sidebar sendCriteria={(filterCriteria:IFilterCriteria) => this.getItemsByCriteria( filterCriteria)}></Sidebar>
                     <div className={"display-section"}>
                         <ItemsComponent></ItemsComponent>
                         <div className={"footer-style"}>

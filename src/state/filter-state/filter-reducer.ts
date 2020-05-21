@@ -17,7 +17,7 @@ export const initialFilterState: IFilterState = {
     },
     filter: {
         searchKey: null, // text from product name
-        category: null,
+        catId: null,
         priceRange: null,
         savings: null,
         sortBy: null, // price and savings

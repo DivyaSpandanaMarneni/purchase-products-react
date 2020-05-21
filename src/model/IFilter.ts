@@ -3,13 +3,6 @@ export interface ICategory {
     catName: String
 }
 
-// export interface IDiscounts {
-//     [key: String]: String
-// }
-//
-// export interface IPriceRanges {
-//
-// }
 
 export interface IFilter {
     categories: ICategory[],
