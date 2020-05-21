@@ -20,7 +20,7 @@ export const initialFilterState: IFilterState = {
         catId: null,
         priceRange: null,
         savings: null,
-        sortBy: null, // price and savings
+        sortBy: "price", // price and savings
         pageIndex: 0,
         pageSize: 0
     }
@@ -34,7 +34,6 @@ export const filterReducer: Reducer<IFilterState, FilterActions> = (
     switch ((action as FilterActions).type) {
 
         case FilterActionTypes.GETALL:
-            console.log('filter action types get all');
             return {
                 ...state,
                 items: (action as IGetAllItemsAction).items
@@ -49,7 +48,14 @@ export const filterReducer: Reducer<IFilterState, FilterActions> = (
                 ...state,
                 filter: (action as ICreateFilterAction).filter
             }
-    }
 
+        case FilterActionTypes.CLEARITEMS:
+            return {
+                ...state,
+                items: initialFilterState.items,
+                filter: initialFilterState.filter
+            }
+    }
+    console.log(" state in reducer outside switch ", state.items.products.length)
     return state;
 }

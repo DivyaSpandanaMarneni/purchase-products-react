@@ -19,7 +19,11 @@ export interface ICreateFilterAction {
     filter: IFilterCriteria
 }
 
-export type FilterActions = IGetAllItemsAction | ICreateFilterAction | IPostByFilterAction;
+export interface IClearItemsAction {
+    type: FilterActionTypes.CLEARITEMS
+}
+
+export type FilterActions = IGetAllItemsAction | ICreateFilterAction | IPostByFilterAction | IClearItemsAction;
 
 export interface IFilterState {
     readonly items: IItems;
@@ -32,7 +36,7 @@ export const getItems: ActionCreator<ThunkAction<Promise<AnyAction>, IFilterStat
         const items: IItems = await FiltersService.getItemsDefault(); // change to API or axios calls
         console.log("action creator result ", items.productCount);
         return dispatch({
-            items: items,
+            items,
             type: FilterActionTypes.GETALL
         });
     };
@@ -43,7 +47,7 @@ export const getItemsByFilter: ActionCreator<ThunkAction<Promise<AnyAction>, IFi
     return async(dispatch: Dispatch) => {
         const items: IItems = await FiltersService.getFilterCategories(filter);
         return dispatch({
-            items: items,
+            items,
             type: FilterActionTypes.POSTBYFILTER
         });
     }
@@ -51,5 +55,10 @@ export const getItemsByFilter: ActionCreator<ThunkAction<Promise<AnyAction>, IFi
 
 export const createFilter: ActionCreator<ICreateFilterAction> = (filter: IFilterCriteria) => ({
     type: FilterActionTypes.CREATEFILTER,
-    filter: filter
+    filter
 })
+
+
+export const clearItems: ActionCreator<IClearItemsAction> = () => ({
+    type: FilterActionTypes.CLEARITEMS
+});

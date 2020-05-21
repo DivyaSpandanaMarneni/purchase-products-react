@@ -5,9 +5,12 @@ import {Sidebar} from "./pages/sidebar/sidebar";
 import Pagination from "react-bootstrap/Pagination";
 import ItemsComponent from "./pages/items/items";
 import {connect} from "react-redux";
-import {getItems, getItemsByFilter, createFilter, IFilterState} from "./state/filter-state/filter-actions";
+import {getItems, getItemsByFilter, createFilter, IFilterState, clearItems} from "./state/filter-state/filter-actions";
 import {RouteComponentProps} from "react-router";
 import {IFilterCriteria, IItems} from "./model/IItems";
+import {initialFilterState} from "./state/filter-state/filter-reducer";
+
+
 
 export interface IAppProps extends RouteComponentProps {
     getItems?: typeof getItems;
@@ -15,50 +18,125 @@ export interface IAppProps extends RouteComponentProps {
     getItemsByFilter?: typeof getItemsByFilter;
     createFilter?: typeof createFilter;
     filter?: IFilterCriteria;
+    clearItems?: typeof clearItems;
 }
 
-class App extends React.Component<IAppProps> {
+export interface IAppState {
+    items: IItems;
+    activePage: number;
+    pageCount: number;
+
+}
+
+// const ItemsComponent = React.lazy(() => import("./pages/items/items"));
+
+class App extends React.Component<IAppProps, IAppState> {
+
+    static PAGESIZE: number = 20;
 
     constructor(props: IAppProps) {
         super(props);
+        this.componentDidMount = this.componentDidMount.bind(this);
+        this.componentWillMount = this.componentWillMount.bind(this);
+        this.componentDidUpdate = this.componentDidUpdate.bind(this);
         this.getItemsByCriteria = this.getItemsByCriteria.bind(this);
+        this.getItemsByPage = this.getItemsByPage.bind(this);
+        this.state = {
+            items: initialFilterState.items,
+            activePage: 1,
+            pageCount: 1
+        }
     }
 
     componentWillMount() {
         this.props.getItems();
     }
 
-    componentDidMount() {
-        console.log('inside component did mount of app: getting items')
-        this.props.getItems();
+    componentDidUpdate(prevProps: Readonly<IAppProps>, prevState: Readonly<{}>, snapshot?: any) {
+        if (prevProps.items !== this.props.items) {
+            console.log("inside component did update");
+            console.log("ACTIVE PAGE ", this.state.activePage);
+            this.setState({items: this.props.items}, () => {
+                if(this.props.items.products && this.props.items.products.length > 0) {
+                    this.setState({
+                        pageCount: this.props.items.products.length / App.PAGESIZE,
+                        items: {
+                            ...this.state.items,
+                            products: [...this.props.items.products.slice(this.state.activePage * App.PAGESIZE, (this.state.activePage + 1) * App.PAGESIZE)]
+                        }
+                    })
+                }
+            });
+
+        }
     }
 
+    componentDidMount() {
+        if(this.props.items && this.props.items.products && this.props.items.products.length ===0) {
+            this.props.getItems();
+        }
+    }
+
+
+
     getItemsByCriteria(filterCriteria: IFilterCriteria): void {
+        this.props.clearItems();
+        this.setState({
+            activePage: 1,
+            pageCount: 1
+        })
         this.props.createFilter(filterCriteria);
-        console.log('filter criteria from side bar ', filterCriteria);
         this.props.getItemsByFilter(filterCriteria);
     }
 
 
+    getItemsByPage(pageNumber: number): void {
+        this.setState({
+            activePage: pageNumber
+        }, () => {
+            this.setState({
+                items: {
+                    ...this.state.items,
+                    products: [...this.props.items.products.slice(this.state.activePage * App.PAGESIZE, (this.state.activePage + 1) * App.PAGESIZE)]
+                }
+            })
+        })
+    }
+
+
+
     public render() {
+
+        if(this.props.items && this.props.items.products) {
+            console.log("props items ", this.props.items.products.length)
+
+            console.log("state products len ", this.state.items.products.length);
+
+
+
+        }
 
         let items: JSX.Element[] = [];
         const active = 2;
 
-        for (let number = 1; number <= 5; number++) {
-            items.push(
-                <Pagination.Item key={number} active={number === active}>
-                    {number}
-                </Pagination.Item>,
-            );
+        if(this.state.pageCount > 1) {
+            for (let number = 1; number <= this.state.pageCount; number++) {
+                items.push(
+                    <Pagination.Item key={number} active={number === this.state.activePage} onClick={() => {this.getItemsByPage(number)}}>
+                        {number}
+                    </Pagination.Item>,
+                );
+            }
         }
+
+
         return (
             <div className="App">
                 <Header></Header>
                 <div className={"area-style"}>
                     <Sidebar sendCriteria={(filterCriteria:IFilterCriteria) => this.getItemsByCriteria( filterCriteria)}></Sidebar>
                     <div className={"display-section"}>
-                        <ItemsComponent></ItemsComponent>
+                        <ItemsComponent items={this.state.items}></ItemsComponent>
                         <div className={"footer-style"}>
                             <Pagination size={"sm"}>{items}</Pagination>
                         </div>
@@ -83,7 +161,8 @@ const mapDispatchToProps = (dispatch: any) => {
     return {
         getItems: () => dispatch(getItems()),
         createFilter: (filter: IFilterCriteria) => dispatch(createFilter(filter)),
-        getItemsByFilter: (filter: IFilterCriteria) => dispatch(getItemsByFilter(filter))
+        getItemsByFilter: (filter: IFilterCriteria) => dispatch(getItemsByFilter(filter)),
+        clearItems: () => dispatch(clearItems())
     }
 }
 

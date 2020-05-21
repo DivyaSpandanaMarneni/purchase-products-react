@@ -1,7 +1,6 @@
-import React from 'react';
+import React, {Suspense} from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
 import * as serviceWorker from './serviceWorker';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {Provider} from "react-redux";
@@ -9,10 +8,15 @@ import store from "./state/store/doc-state";
 import {Router, Route} from "react-router-dom";
 import history from "./state/store/history";
 
+const AppComponent = React.lazy(() => import("./App"));
+
+
 ReactDOM.render(
     <Provider store={store}>
         <Router history={history}>
-            <Route path="/" component={App}></Route>
+            <Suspense fallback={<div>Loading.......</div>}>
+                <Route path="/" component={AppComponent}></Route>
+            </Suspense>
         </Router>
     </Provider>
   ,

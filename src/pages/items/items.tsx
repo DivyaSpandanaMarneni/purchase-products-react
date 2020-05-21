@@ -5,51 +5,46 @@ import {ItemCard} from "./item-card";
 import { IItems} from "../../model/IItems";
 import {IItem} from "../../model/IItem";
 
-
+export type IItemsProps = {
+    items: IItems;
+    // paging info optional
+}
 
 export type ItemsInfoState = {
     items: IItems,
     itemsLoading: boolean
 }
 
-export default class ItemsComponent extends Component<any, ItemsInfoState> {
-    constructor(props:any) {
+export default class ItemsComponent extends Component<IItemsProps, ItemsInfoState> {
+    constructor(props:IItemsProps) {
         super(props);
         this.state = {
-            items: {
-                products: [],
-                filterCriteria: null,
-                productCount: 0,
-                currentPage: 0
-            },
+            items: this.props.items,
             itemsLoading: true
         }
+
     }
 
     componentDidMount() {
-
-        fetch('http://doc-aks-ingress.eastus.cloudapp.azure.com:8082/doc/products')
-            .then(res => res.json())
-            .then((data: IItems) => {
-                console.log("items data count ", data.productCount);
-                console.log("items data ", data.filterCriteria);
-                this.setState({ items: data, itemsLoading: false })
-            })
-            .catch(console.log)
     }
 
+
+
     render() {
+        if (this.state.items && this.state.items.products)
+        console.log("rendering inside items ", this.state.items.products.length, " ", this.props.items.products.length);
         return (
             <div className={"items-wrapper"}>
                 <div className={"display-style"}>
                     {
-                        this.state.items.products.map((item: IItem, index: number) => {
+                        this.props.items && this.props.items.products ?
+                        this.props.items.products.map((item: IItem, index: number) => {
                             return (
                                 <div className={"product-card"}>
                                     <ItemCard itemDetails={item}></ItemCard>
                                 </div>
                             )
-                        })
+                        }) : <div>items not available</div>
                     }
 
 
