@@ -52,7 +52,7 @@ export class Sidebar extends Component<ISidebarProps, SidebarState> {
 
     public componentDidMount() {
 
-        fetch('http://52.170.164.177:8082/doc/appdata', {
+        fetch('http://doc-aks-ingress.eastus.cloudapp.azure.com:8082/doc/appdata', {
             method: 'get',
             headers: {
                 'Content-Type': 'application/json',
