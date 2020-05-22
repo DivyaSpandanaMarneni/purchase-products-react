@@ -38,6 +38,7 @@
     display: flex;
     flex-wrap: wrap;
     flex: 1;
+    margin-left: 2px;
 
     .product-card {
       padding: 0;
@@ -49,6 +50,25 @@
       height: 250px;
       margin: 2px;
 
+    }
+
+    .embed-card-style {
+      margin-left: 20%;
+    }
+
+    .card-style {
+      background-color: lightsteelblue;
+
+
+      h6 {
+        line-height: 12px;
+        font-family: sans-serif;
+        margin-bottom: 5px;
+      }
+
+      .button-style {
+        background-color: #34495e;
+      }
     }
   }
 }

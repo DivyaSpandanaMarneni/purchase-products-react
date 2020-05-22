@@ -114,12 +114,18 @@ class App extends React.Component<IAppProps, IAppState> {
         })
     }
 
+    clearChips = () => {
+        this.setState({
+            chips: []
+        });
+        this.props.getItems();
+    }
+
 
 
     public render() {
 
         let items: JSX.Element[] = [];
-        const active = 2;
 
         if(this.state.pageCount > 1) {
             for (let number = 1; number <= this.state.pageCount; number++) {
@@ -138,7 +144,11 @@ class App extends React.Component<IAppProps, IAppState> {
                 <div className={"area-style"}>
                     <Sidebar sendCriteria={(filterCriteria:IFilterCriteria) => this.getItemsByCriteria( filterCriteria)}></Sidebar>
                     <div className={"display-section"}>
-                        <ItemsComponent filters={this.state.chips} items={this.state.items} itemsTotal={this.props.items.products.length}></ItemsComponent>
+                        <ItemsComponent filters={this.state.chips}
+                                        items={this.state.items}
+                                        itemsTotal={this.props.items && this.props.items.products ? this.props.items.products.length : 0}
+                                        clearFilter={this.clearChips}
+                        ></ItemsComponent>
                         <div className={"footer-style"}>
                             <Pagination size={"sm"}>{items}</Pagination>
                         </div>

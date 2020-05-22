@@ -5,12 +5,17 @@ import {ItemCard} from "./item-card";
 import { IItems} from "../../model/IItems";
 import {IItem} from "../../model/IItem";
 import Badge from "react-bootstrap/Badge";
+import Card from "react-bootstrap/Card";
+import Button from "react-bootstrap/Button";
 
 export type IItemsProps = {
     items: IItems;
     filters: string[];
     itemsTotal: number;
+    clearFilter: () => void;
+
 }
+
 
 export type ItemsInfoState = {
     items: IItems,
@@ -39,6 +44,10 @@ export default class ItemsComponent extends Component<IItemsProps, ItemsInfoStat
     }
 
     componentDidMount() {
+    }
+
+    clearChips = () => {
+        this.props.clearFilter();
     }
 
 
@@ -70,7 +79,16 @@ export default class ItemsComponent extends Component<IItemsProps, ItemsInfoStat
                                     <ItemCard itemDetails={item}></ItemCard>
                                 </div>
                             )
-                        }) : <div>items not available</div>
+                        }) : <div className={"embed-card-style"}>
+                            <Card>
+                                <Card.Body className={"card-style"}>
+                                    <Card.Text>
+                                        <h6>Items not available with the given filter</h6>
+                                        <Button className={"button-style"} onClick={this.clearChips}>Load all</Button>
+                                    </Card.Text>
+                                </Card.Body>
+                            </Card>
+                            </div>
                     }
 
 
