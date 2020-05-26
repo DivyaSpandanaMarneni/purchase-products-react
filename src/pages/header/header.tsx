@@ -1,6 +1,6 @@
 import * as React from "react";
 import {Component} from "react";
-import "./header.css";
+import "./header.scss";
 import {Title} from "./title/title";
 
 export class Header extends Component<any, any> {
@@ -9,8 +9,9 @@ export class Header extends Component<any, any> {
             <div className="header-wrapper">
                 <div><Title></Title></div>
                 <div className="header-style">
-                    <h1>DoC</h1>
-
+                    <div className={"shopping-img"}> </div>
+                    <div className={"heading-section"}><h2>DealsThing</h2></div>
+                    <div className={"shopping-img"}> </div>
                 </div>
             </div>
         );

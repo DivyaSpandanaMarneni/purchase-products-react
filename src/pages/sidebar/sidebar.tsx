@@ -53,33 +53,33 @@ export class Sidebar extends Component<ISidebarProps, SidebarState> {
     }
 
     public componentDidMount() {
-        // axios.create({
-        //     url: '',
-        //     headers: {
-        //         'Content-Type': 'application/json',
-        //         'Access-Control-Allow-Origin': '*'
-        //     }
-        // }).get('http://doc-aks-ingress.eastus.cloudapp.azure.com:8082/doc/appdata')
-        //     .then((response: AxiosResponse<IFilter>) => {
-        //         this.setState({
-        //             filterData: response.data
-        //         });
-        //     })
-        //     .catch(console.log);
-
-
-        fetch('http://doc-aks-ingress.eastus.cloudapp.azure.com:8082/doc/appdata', {
-            method: 'get',
+        axios.create({
+            url: '',
             headers: {
                 'Content-Type': 'application/json',
-            },
-            mode: 'cors'
-        })
-            .then(res => res.json())
-            .then((data: IFilter) => {
-                this.setState({ filterData: data })
+                'Access-Control-Allow-Origin': '*'
+            }
+        }).get('http://doc-aks-ingress.eastus.cloudapp.azure.com:8082/doc/appdata')
+            .then((response: AxiosResponse<IFilter>) => {
+                this.setState({
+                    filterData: response.data
+                });
             })
-            .catch(console.log)
+            .catch(console.log);
+
+
+        // fetch('http://doc-aks-ingress.eastus.cloudapp.azure.com:8082/doc/appdata', {
+        //     method: 'get',
+        //     headers: {
+        //         'Content-Type': 'application/json',
+        //     },
+        //     mode: 'cors'
+        // })
+        //     .then(res => res.json())
+        //     .then((data: IFilter) => {
+        //         this.setState({ filterData: data })
+        //     })
+        //     .catch(console.log)
 
     }
 
