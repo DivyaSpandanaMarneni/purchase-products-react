@@ -9,9 +9,6 @@ export class Header extends Component<any, any> {
             <div className="header-wrapper">
                 <div><Title></Title></div>
                 <div className="header-style">
-                    <div className={"shopping-img"}> </div>
-                    <div className={"heading-section"}><h2>DealsThing</h2></div>
-                    <div className={"shopping-img"}> </div>
                 </div>
             </div>
         );

@@ -9,6 +9,9 @@ export class Title extends Component<any, any> {
                 <div className="help-text">
                     <h5>HELP</h5>
                 </div>
+                <div className={"help-text"}>
+                    <h3>DealsThing</h3>
+                </div>
                 <div className="signin-text">
                     <h5>SIGN IN</h5>
                 </div>

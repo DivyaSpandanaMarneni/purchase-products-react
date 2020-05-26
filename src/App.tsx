@@ -125,7 +125,7 @@ class App extends React.Component<IAppProps, IAppState> {
         if(this.state.pageCount > 1) {
             for (let number = 1; number <= this.state.pageCount; number++) {
                 items.push(
-                    <Pagination.Item key={number} active={number === this.state.activePage} onClick={() => {this.getItemsByPage(number-1)}}>
+                    <Pagination.Item key={number} active={number === this.state.activePage+1} onClick={() => {this.getItemsByPage(number-1)}}>
                         {number}
                     </Pagination.Item>,
                 );
