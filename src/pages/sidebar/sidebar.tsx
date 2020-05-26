@@ -39,7 +39,7 @@ export class Sidebar extends Component<ISidebarProps, SidebarState> {
             error: "",
             filterCriteria: {
                 searchKey: null, // text from product name
-                catId: 0,
+                category: null,
                 priceRange: null,
                 savings: null,
                 sortBy: "price", // price and savings
@@ -94,7 +94,7 @@ export class Sidebar extends Component<ISidebarProps, SidebarState> {
                 this.setState({
                     filterCriteria: {
                         ...this.state.filterCriteria,
-                        catId: value as number
+                        category: value as number
                     }
                 }, () => {
                     this.props.sendCriteria(this.state.filterCriteria);

@@ -25,11 +25,9 @@ export interface IAppState {
     items: IItems;
     activePage: number;
     pageCount: number;
-    chips: string[]
+    chips: string[];
 
 }
-
-// const ItemsComponent = React.lazy(() => import("./pages/items/items"));
 
 class App extends React.Component<IAppProps, IAppState> {
 
@@ -44,27 +42,24 @@ class App extends React.Component<IAppProps, IAppState> {
         this.getItemsByPage = this.getItemsByPage.bind(this);
         this.state = {
             items: initialFilterState.items,
-            activePage: 1,
-            pageCount: 1,
-            chips: []
+            activePage: 0,
+            pageCount: 0,
+            chips: [],
         }
     }
 
     componentWillMount() {
         this.props.getItems();
+
     }
 
     componentDidUpdate(prevProps: Readonly<IAppProps>, prevState: Readonly<{}>, snapshot?: any) {
-        if (prevProps.items !== this.props.items) {
-            this.setState({items: this.props.items}, () => {
-                if(this.props.items.products && this.props.items.products.length > 0) {
-                    this.setState({
-                        pageCount: this.props.items.products.length / App.PAGESIZE,
-                        items: {
-                            ...this.state.items,
-                            products: [...this.props.items.products.slice(this.state.activePage * App.PAGESIZE, (this.state.activePage + 1) * App.PAGESIZE)]
-                        }
-                    })
+        if (prevProps.items !== this.props.items && (this.props.items.products && this.props.items.products.length > 0)) {
+            this.setState({
+                pageCount: this.props.items.products.length / App.PAGESIZE + ( this.props.items.products.length % App.PAGESIZE >= 1 ? 1 : 0),
+                items: {
+                    ...this.props.items,
+                    products: [...this.props.items.products.slice(this.state.activePage * App.PAGESIZE, (this.state.activePage + 1) * App.PAGESIZE)]
                 }
             });
 
@@ -72,7 +67,7 @@ class App extends React.Component<IAppProps, IAppState> {
     }
 
     componentDidMount() {
-        if(this.props.items && this.props.items.products && this.props.items.products.length ===0) {
+        if(this.props.items && this.props.items.products && this.props.items.products.length ===0 && (this.props.items.filterCriteria && this.props.items.filterCriteria.category === null && this.props.items.filterCriteria.priceRange === null && this.props.items.filterCriteria.savings === null)) {
             this.props.getItems();
         }
     }
@@ -94,7 +89,7 @@ class App extends React.Component<IAppProps, IAppState> {
         this.props.clearItems();
         this.setState({
             activePage: 1,
-            pageCount: 1
+            pageCount: 0
         })
         this.props.createFilter(filterCriteria);
         this.props.getItemsByFilter(filterCriteria);
@@ -103,14 +98,13 @@ class App extends React.Component<IAppProps, IAppState> {
 
     getItemsByPage(pageNumber: number): void {
         this.setState({
-            activePage: pageNumber
+            activePage: pageNumber,
+            items: {
+                ...this.state.items,
+                products: [...this.props.items.products.slice((this.state.activePage+1) * App.PAGESIZE, (this.state.activePage + 2) * App.PAGESIZE)]
+            }
         }, () => {
-            this.setState({
-                items: {
-                    ...this.state.items,
-                    products: [...this.props.items.products.slice(this.state.activePage * App.PAGESIZE, (this.state.activePage + 1) * App.PAGESIZE)]
-                }
-            })
+
         })
     }
 
@@ -130,7 +124,7 @@ class App extends React.Component<IAppProps, IAppState> {
         if(this.state.pageCount > 1) {
             for (let number = 1; number <= this.state.pageCount; number++) {
                 items.push(
-                    <Pagination.Item key={number} active={number === this.state.activePage} onClick={() => {this.getItemsByPage(number)}}>
+                    <Pagination.Item key={number} active={number === this.state.activePage} onClick={() => {this.getItemsByPage(number-1)}}>
                         {number}
                     </Pagination.Item>,
                 );

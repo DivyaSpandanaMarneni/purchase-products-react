@@ -4,7 +4,7 @@ import {IItem} from "./IItem";
 
 export interface IFilterCriteria {
     searchKey: string; // text from product name
-    catId:number;
+    category:number;
     priceRange: string;
     savings: string;
     sortBy: string; // price and savings

@@ -54,6 +54,10 @@ export default class ItemsComponent extends Component<IItemsProps, ItemsInfoStat
 
     render() {
 
+        // if(this.props.items && this.props.items.products) {
+        //     console.log("items length in items.tsx ", this.props.items.products.length);
+        // }
+
         return (
             <div className={"items-wrapper"}>
                 <div className={"filter-area"}>
