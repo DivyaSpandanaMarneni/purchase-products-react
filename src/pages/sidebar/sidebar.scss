@@ -14,7 +14,8 @@
   #nav-categories {
     border: 1px solid grey;
     border-radius: 10px;
-    color: grey;
+    color: white;
+    font-size: 14px;
     background-color: #34495e;
     margin: 2px 4px 2px 0;
     position: relative;
@@ -37,6 +38,10 @@
   grid-column: auto;
   display: contents;
 }
+
+  //.nav-item {
+  //  color: white;
+  //}
 
   .dropdown-menu.show {
     display: contents;

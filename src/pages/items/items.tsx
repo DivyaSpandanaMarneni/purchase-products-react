@@ -32,14 +32,14 @@ export default class ItemsComponent extends Component<IItemsProps, ItemsInfoStat
         }
 
 
-        this.map.set(0, "Men");
-        this.map.set(1, "Women");
-        this.map.set(2, "Kids");
-        this.map.set(3, "Shoes");
-        this.map.set(4, "Handbags");
-        this.map.set(5, "Beauty");
-        this.map.set(6, "Juniors");
-        this.map.set(7, "Accessories");
+        this.map.set(1, "Men");
+        this.map.set(2, "Women");
+        this.map.set(3, "Kids");
+        this.map.set(4, "Shoes");
+        this.map.set(5, "Handbags");
+        this.map.set(6, "Beauty");
+        this.map.set(7, "Juniors");
+        this.map.set(8, "Accessories");
 
     }
 

@@ -7,6 +7,8 @@ import ListGroup from "react-bootstrap/ListGroup";
 import ListGroupItem from "react-bootstrap/ListGroupItem";
 import {ICategory, IFilter} from "../../model/IFilter"
 import {FilterType, IFilterCriteria} from "../../model/IItems";
+import {AxiosInstance, AxiosResponse} from "axios";
+import axios from "axios";
 
 
 type SidebarState = {
@@ -51,6 +53,20 @@ export class Sidebar extends Component<ISidebarProps, SidebarState> {
     }
 
     public componentDidMount() {
+        // axios.create({
+        //     url: '',
+        //     headers: {
+        //         'Content-Type': 'application/json',
+        //         'Access-Control-Allow-Origin': '*'
+        //     }
+        // }).get('http://doc-aks-ingress.eastus.cloudapp.azure.com:8082/doc/appdata')
+        //     .then((response: AxiosResponse<IFilter>) => {
+        //         this.setState({
+        //             filterData: response.data
+        //         });
+        //     })
+        //     .catch(console.log);
+
 
         fetch('http://doc-aks-ingress.eastus.cloudapp.azure.com:8082/doc/appdata', {
             method: 'get',
@@ -75,12 +91,16 @@ export class Sidebar extends Component<ISidebarProps, SidebarState> {
         // state is getting updated with a delay
         switch (filterType) {
             case FilterType.CATEGORY:
-                this.setState( {
+                this.setState({
                     filterCriteria: {
                         ...this.state.filterCriteria,
                         catId: value as number
                     }
-                })
+                }, () => {
+                    this.props.sendCriteria(this.state.filterCriteria);
+
+                });
+
                 break;
             case FilterType.PRICERANGE:
                 this.setState({
@@ -88,6 +108,9 @@ export class Sidebar extends Component<ISidebarProps, SidebarState> {
                         ...this.state.filterCriteria,
                         priceRange: value as string
                     }
+                }, () => {
+                    this.props.sendCriteria(this.state.filterCriteria);
+
                 })
                 break;
             case FilterType.DISCOUNTS:
@@ -96,7 +119,10 @@ export class Sidebar extends Component<ISidebarProps, SidebarState> {
                         ...this.state.filterCriteria,
                         savings: value as string
                     }
-                })
+                }, () => {
+                    this.props.sendCriteria(this.state.filterCriteria);
+
+                });
                 break;
 
             default:
@@ -104,7 +130,7 @@ export class Sidebar extends Component<ISidebarProps, SidebarState> {
 
         }
 
-        this.props.sendCriteria(this.state.filterCriteria);
+
     }
 
     render() {

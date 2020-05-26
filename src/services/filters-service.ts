@@ -4,9 +4,7 @@ export class FiltersService {
 
 
     public static async getFilterCategories(filterCriteria: IFilterCriteria): Promise<IItems> {
-
-        console.log("stringified filter content ", JSON.stringify(filterCriteria));
-
+        
         return fetch('http://doc-aks-ingress.eastus.cloudapp.azure.com:8082/doc/products', {
             method: 'post',
             body: JSON.stringify(filterCriteria),
