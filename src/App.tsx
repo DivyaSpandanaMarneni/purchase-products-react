@@ -54,15 +54,16 @@ class App extends React.Component<IAppProps, IAppState> {
     }
 
     componentDidUpdate(prevProps: Readonly<IAppProps>, prevState: Readonly<{}>, snapshot?: any) {
+
         if (prevProps.items !== this.props.items && (this.props.items.products && this.props.items.products.length > 0)) {
             this.setState({
-                pageCount: this.props.items.products.length / App.PAGESIZE + ( this.props.items.products.length % App.PAGESIZE >= 1 ? 1 : 0),
+                pageCount: Math.floor(this.props.items.products.length / App.PAGESIZE) + ( this.props.items.products.length % App.PAGESIZE >= 1 ? 1 : 0),
                 items: {
                     ...this.props.items,
                     products: [...this.props.items.products.slice(this.state.activePage * App.PAGESIZE, (this.state.activePage + 1) * App.PAGESIZE)]
                 }
             });
-
+            
         }
     }
 
@@ -88,7 +89,7 @@ class App extends React.Component<IAppProps, IAppState> {
 
         this.props.clearItems();
         this.setState({
-            activePage: 1,
+            activePage: 0,
             pageCount: 0
         })
         this.props.createFilter(filterCriteria);
