@@ -63,7 +63,7 @@ class App extends React.Component<IAppProps, IAppState> {
                     products: [...this.props.items.products.slice(this.state.activePage * App.PAGESIZE, (this.state.activePage + 1) * App.PAGESIZE)]
                 }
             });
-            
+
         }
     }
 
@@ -80,7 +80,7 @@ class App extends React.Component<IAppProps, IAppState> {
         const entries: string[] = [];
 
         Object.entries(filterCriteria).forEach(([key,value] )=> {
-            if((key === "priceRange" || key === "savings" || key === "catId") && value != null) {
+            if((key === "priceRange" || key === "savings" || key === "category") && value != null) {
                 entries.push(value);
             }
         });
